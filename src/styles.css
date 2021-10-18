@@ -135,3 +135,6 @@ font-style: italic;
     margin: 0 auto;
     font-size: 10px;
 }
+.currentCity {
+    text-transform: capitalize;
+}
