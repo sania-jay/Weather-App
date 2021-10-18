@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <link rel="stylesheet" href="src/styles.css">
+    <title>Weather App</title>
+</head>
+<body>
+   <div class="container">
+     <div class="weather-app">
+       <div class="row row1">
+           <div class="col-md-10">
+<form id="search-city">
+  <a href="#" class="current-location">
+    <img src="src/images/my-location-icon-4.jpeg" alt="current-Location-Icon" id="current-location">
+  </a>
+    <input type="search" placeholder="type a city..." class="searchInput"/> 
+    <input type="submit" value="Search" class="btn btn-primary"/>
+  
+</form>
+           </div>
+           <div class="row2">
+               <div class="col-md-12 current-col">
+                 <div class="row">
+                    <div class="col-md-6">
+                      <div class= "clearfix">
+                       <h2>
+                         <span id="currentCity">Manchester</span>, <span id="country">UK</span> 
+                       </h2>
+                       <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=1260/uploads/users/16/posts/30551/final_image/cloud850.png" 
+                       alt="cloud-image" 
+                       class="weather-icon float-left">
+                    
+                       <span class="currentTemp" id= "tempNow"> 
+                      18</span><span class="degrees"> 
+                        <span id="celsius">°C </span>
+                      </span>
+                      </div>
+                      
+                         <ul>   
+                        <li>
+                            <strong><span class="currentWeatherDescription">Mostly Cloudy</span></strong>
+                        </li>
+                        <li>
+                            <strong>H:</strong><span class="currentHigh">19°C</span> | <strong>L:</strong><span class="currentLow">19°C</span>
+                        </li>
+                    <li class="current" id="time" >
+                            Current Date and Time!
+                        </li>
+                      </ul>   
+                </div>
+               <div class="col-md-5 current-col2">
+                 
+                 <div class="row">
+                   <div class="col-md-3 col1">
+                            Sunrise
+                   </div>
+                   <div class="col col2">
+                            <span class="sunrise">7:07</span>am
+                   </div>
+                 </div>
+                 <div class="row">
+                   <div class="col-md-3 col1">
+                            Sunset
+                   </div>
+                   <div class="col col2">
+                            <span class="sunset">6:52</span>pm
+                   </div>
+                 </div>
+                
+                 <div class="row">
+                   <div class="col-md-3 col1">
+                            Humidity
+                   </div>
+                   <div class="col col2">
+                            <span class="humidity">86</span>%
+                   </div>
+                   </div>
+                   <div class="row">
+                   <div class="col-md-3 col1">
+                            Wind 
+                   </div>
+                   <div class="col col2">
+                            s <span class="wind">9</span> mph
+                   </div>
+                   </div>
+                   <div class="row">
+                   <div class="col-md-3 col1">
+                            Feels Like
+                   </div>
+                   <div class="col col2">
+                            <span class="feelsLikeTemp">20</span>°C
+                   </div>
+                   </div>
+                   
+                  
+                   <div class="row">
+                   <div class="col-md-3 col1">
+                            Pressure
+                   </div>
+                   <div class="col col2">
+                            <span class="pressure">1010</span> hPa
+                   </div>
+                   </div>
+                   <div class="row">
+                   <div class="col-md-3 col1">
+                            Visibility
+                   </div>
+                   <div class="col col2">
+                            <span class="visibility">0</span>km
+                   </div>
+                   </div>
+                   
+                  </div>
+                  </div>
+                  </div>
+                  
+                 
+                </div>
+                </div>
+                 <div class="row"> 
+               <div class="col-12 hourly-col2">
+               <h3> HOURLY </h3>
+<hr/>
+               <div class="row row-hourly">
+                 <div class="col hourly-card">
+                    <ul>
+                      <li>
+                        Now
+                      </li>
+                      <li>
+                        🌤
+                      </li>
+                      <li>
+                        19°
+                      </li>
+                    </ul>
+
+              </div> 
+                    <div class="col hourly-card">
+                    <ul>
+                      <li>
+                        4pm
+                      </li>
+                      <li>
+                        🌤
+                      </li>
+                      <li>
+                        19°
+                      </li>
+                    </ul>
+
+              </div>    
+              <div class="col hourly-card">
+                    <ul>
+                      <li>
+                        5pm
+                      </li>
+                      <li>
+                        🌤
+                      </li>
+                      <li>
+                        19°
+                      </li>
+                    </ul>
+
+              </div>  <div class="col hourly-card">
+                    <ul>
+                      <li>
+                        6pm
+                      </li>
+                      <li>
+                        🌤
+                      </li>
+                      <li>
+                        19°
+                      </li>
+                    </ul>
+
+              </div>  <div class="col hourly-card">
+                    <ul>
+                      <li>
+                        7pm
+                      </li>
+                      <li>
+                        🌤
+                      </li>
+                      <li>
+                        19°
+                      </li>
+                    </ul>
+
+              </div>  <div class="col hourly-card">
+                    <ul>
+                      <li>
+                        7:07pm
+                      </li>
+                      <li>
+                        🌤
+                      </li>
+                      <li>
+                        19°
+                      </li>
+                    </ul>
+
+              </div>                                   
+   </div> 
+   </div>
+   </div>
+   </div>
+   </div>
+   
+   <p class="owner">
+    <small>App built by Sania Javed,
+      <a href="https://github.com/sania-jay/Weather-App" target="_blank"">Open-sourced code</a> on Github
+    </small>
+   </p>
+   
+<script src="src/app.js">
+
+</script>
+  </body>
+</html>
