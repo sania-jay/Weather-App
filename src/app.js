@@ -106,6 +106,10 @@ function displaytemp(response) {
   let sunset = document.querySelector(".sunset");
   sunset.innerHTML = `${response.data.sys.sunset}`;
 
+// converted dt with format
+let time= document.querySelector("#time");
+time.innerHTML=format(response.data.dt*1000);
+
 }
 function search(event) {
   event.preventDefault();
@@ -143,6 +147,14 @@ country.innerHTML= `${response.data.sys.country}`;
     ".currentWeatherDescription");
   currentWeatherDescription.innerHTML=`${response.data.weather[0].main}`;
 
+  let weatherIcon = document.querySelector("#icon");
+   weatherIcon.setAttribute(
+     "src",
+     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+   );
+   weatherIcon.setAttribute("alt", response.data.weather[0].description);
+;
+
 let currentHighTemperature = document.querySelector(".currentHigh");
 currentHighTemperature.innerHTML=`${Math.round(response.data.main.temp_max)}`;
 
@@ -170,8 +182,6 @@ sunrise.innerHTML = `${response.data.sys.sunrise}`;
 
 let sunset = document.querySelector(".sunset");
 sunset.innerHTML = `${response.data.sys.sunset}`;
-
-
 
 }
 
