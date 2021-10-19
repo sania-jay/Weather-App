@@ -138,3 +138,9 @@ font-style: italic;
 .currentCity {
     text-transform: capitalize;
 }
+#description {
+    text-transform: capitalize;
+}
+#currentCity {
+    text-transform: capitalize;
+}

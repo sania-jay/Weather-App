@@ -1,4 +1,5 @@
 // current date
+
 let now = new Date();
 
 let current = document.querySelector("#time");
@@ -42,6 +43,7 @@ let months = [
 ];
 
 let month = months[now.getMonth()];
+ 
 current.innerHTML = `${month} ${date}, ${day} ${hours}:${minutes}`;
 
 function celsius(event) {
@@ -69,10 +71,13 @@ function displaytemp(response) {
   let country = document.querySelector("#country");
   country.innerHTML = `${response.data.sys.country}`;
 
+  let icon= document.querySelector("#icon");
+  icon.innerHTML= `${response.data.weather[0].icon}`;
+
   let currentWeatherDescription = document.querySelector(
     ".currentWeatherDescription"
   );
-  currentWeatherDescription.innerHTML = `${response.data.weather[0].main}`;
+  currentWeatherDescription.innerHTML = `${response.data.weather[0].description}`;
 
   let currentHighTemperature = document.querySelector(".currentHigh");
   currentHighTemperature.innerHTML = `${Math.round(
@@ -137,6 +142,9 @@ function displayCurrentLocation (response) {
   let currentLocationTemperature = document.querySelector("#tempNow");
   currentLocationTemperature.innerHTML= `${Math.round(response.data.main.temp)}`;
 
+let date = document.querySelector("#time");
+
+
 let currentLocationCity = document.querySelector("#currentCity");
   currentLocationCity.innerHTML= `${response.data.name}`;
   
@@ -147,13 +155,6 @@ country.innerHTML= `${response.data.sys.country}`;
     ".currentWeatherDescription");
   currentWeatherDescription.innerHTML=`${response.data.weather[0].main}`;
 
-  let weatherIcon = document.querySelector("#icon");
-   weatherIcon.setAttribute(
-     "src",
-     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-   );
-   weatherIcon.setAttribute("alt", response.data.weather[0].description);
-;
 
 let currentHighTemperature = document.querySelector(".currentHigh");
 currentHighTemperature.innerHTML=`${Math.round(response.data.main.temp_max)}`;
