@@ -71,13 +71,16 @@ function displaytemp(response) {
   let country = document.querySelector("#country");
   country.innerHTML = `${response.data.sys.country}`;
 
-  let icon= document.querySelector("#icon");
-  icon.innerHTML= `${response.data.weather[0].icon}`;
-
   let currentWeatherDescription = document.querySelector(
     ".currentWeatherDescription"
   );
   currentWeatherDescription.innerHTML = `${response.data.weather[0].description}`;
+
+  let weatherIcon = document.querySelector("#icon");
+  weatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 
   let currentHighTemperature = document.querySelector(".currentHigh");
   currentHighTemperature.innerHTML = `${Math.round(
