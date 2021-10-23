@@ -54,6 +54,9 @@ function celsius(event) {
 
 //current temp
 function displaytemp(response) {
+  let currentCity = document.querySelector("#currentCity");
+currentCity.innerHTML= (response.data.name);
+
   let currentTemp = document.querySelector("#tempNow");
   currentTemp.innerHTML = Math.round(response.data.main.temp);
 
@@ -106,28 +109,30 @@ weatherIcon.setAttribute("alt", response.data.weather[0].description);
   sunset.innerHTML = `${response.data.sys.sunset}`;
 
 // converted dt with format
-let time= document.querySelector("#time");
-time.innerHTML=format(response.data.dt*1000);
+    
 
 }
-function search(event) {
+function search(city) {
+ let units = "metric";
+  let apiKey = "62231151ce343c4d68652e1617efc22f";
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+
+  axios.get(url).then(displaytemp);
+}
+
+search("singapore")
+
+function handleSubmit(event) {
   event.preventDefault();
   
   let searchInput = document.querySelector(".searchInput");
   let currentCity = document.querySelector("#currentCity");
 
-  currentCity.innerHTML = `${searchInput.value}`;
-  
-
-  let units = "metric";
-  let apiKey = "62231151ce343c4d68652e1617efc22f";
-  let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchInput.value}&appid=${apiKey}&units=${units}`;
-
-  axios.get(url).then(displaytemp);
+  search(searchInput.value);  
 }
 
 let form = document.querySelector("#search-city");
-form.addEventListener("submit", search);
+form.addEventListener("submit", handleSubmit);
 
 
 // current location search
