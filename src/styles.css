@@ -144,3 +144,14 @@ font-style: italic;
 #currentCity {
     text-transform: capitalize;
 }
+
+
+
+.units .active {
+    color: black;
+cursor: default;
+}
+
+.units.active:hover {
+    text-decoration: none;
+}
