@@ -51,7 +51,7 @@ function celsius(event) {
   let currentTemp = document.querySelector(".currentTemp");
   currentTemp.innerHTML = "18";
 }
-
+// future date forecast
 function formatDay(timestamp) {
 
   let date = new Date (timestamp * 1000);
@@ -155,13 +155,9 @@ weatherIcon.setAttribute("alt", response.data.weather[0].description);
   let visibility = document.querySelector(".visibility");
   visibility.innerHTML = `${Math.round(response.data.visibility / 100) / 10}`;
 
-  let sunrise = document.querySelector(".sunrise");
-  sunrise.innerHTML = `${response.data.sys.sunrise}`;
-
-  let sunset = document.querySelector(".sunset");
-  sunset.innerHTML = `${response.data.sys.sunset}`;
 
   getForecast(response.data.coord);
+
 }
 
 function search(city) {
@@ -230,15 +226,10 @@ pressure.innerHTML = `${response.data.main.pressure}`;
 let visibility = document.querySelector(".visibility");
 visibility.innerHTML = `${Math.round(response.data.visibility/100)/10}`;
 
-let sunrise = document.querySelector(".sunrise");
-sunrise.innerHTML = `${response.data.sys.sunrise}`;
 
-let sunset = document.querySelector(".sunset");
-sunset.innerHTML = `${response.data.sys.sunset}`;
-
-
-
+ getForecast(response.data.coord);
 }
+
 
 function showPosition(position) {
         let latitude = position.coords.latitude;
