@@ -52,6 +52,34 @@ function celsius(event) {
   currentTemp.innerHTML = "18";
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  
+  let forecastHTML= `<div class="row"> 
+               <div class="col-12">
+               <h3> <strong>7 Days Forecast</strong></h3>
+<hr/>
+<div class="row">`;
+let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+days.forEach(function (day) {
+forecastHTML = forecastHTML + `
+                 <div class="col-2">
+                   <div class="weather-forecast-date"><strong>${day}</strong></div>
+                    <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="cloudy" class=forecast-icon width="36"/>
+                  
+                      <div class="weather-forecast-temperatures">
+                        <span class="weather-forecast-temperature-max"><strong>18°</strong></span>
+                      <span class="weather-forecast-temperature-min">12°</span>
+                      </div>
+                      </div>`;
+                     
+});
+  
+
+                      forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;                    
+}
+
 //current temp
 function displaytemp(response) {
   let currentCity = document.querySelector("#currentCity");
@@ -109,7 +137,7 @@ weatherIcon.setAttribute("alt", response.data.weather[0].description);
   sunset.innerHTML = `${response.data.sys.sunset}`;
 
 // converted dt with format
-    
+
 
 }
 function search(city) {
@@ -120,7 +148,8 @@ function search(city) {
   axios.get(url).then(displaytemp);
 }
 
-search("singapore")
+search("singapore");
+displayForecast();
 
 function handleSubmit(event) {
   event.preventDefault();
