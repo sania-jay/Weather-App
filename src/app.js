@@ -4,7 +4,7 @@ let now = new Date();
 
 let current = document.querySelector("#time");
 
-let date = now.getDate();
+
 let hours = now.getHours();
 if (hours < 10) {
   hours = `0${hours}`;
@@ -26,25 +26,8 @@ let days = [
 ];
 
 let day = days[now.getDay()];
-
-let months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
-let month = months[now.getMonth()];
  
-current.innerHTML = `${month} ${date}, ${day} ${hours}:${minutes}`;
+current.innerHTML = `${day} ${hours}:${minutes}`;
 
 function celsius(event) {
   event.preventDefault();
@@ -154,6 +137,7 @@ weatherIcon.setAttribute("alt", response.data.weather[0].description);
   // converted to km from m with the format
   let visibility = document.querySelector(".visibility");
   visibility.innerHTML = `${Math.round(response.data.visibility / 100) / 10}`;
+
 
 
   getForecast(response.data.coord);
