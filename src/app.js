@@ -52,33 +52,58 @@ function celsius(event) {
   currentTemp.innerHTML = "18";
 }
 
-function displayForecast() {
+function formatDay(timestamp) {
+
+  let date = new Date (timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+  return days[day];
+}
+function displayForecast(response) {
+ 
+  let forecast=response.data.daily;
+  
   let forecastElement = document.querySelector("#forecast");
   
   let forecastHTML= `<div class="row"> 
-               <div class="col-12">
-               <h3> <strong>7 Days Forecast</strong></h3>
-<hr/>
-<div class="row">`;
-let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-days.forEach(function (day) {
-forecastHTML = forecastHTML + `
+              <div class="col-12">
+              <h3> <strong>Forecast For Next Few Days</strong></h3>
+              <hr/>
+              <div class="row">`;
+
+forecast.forEach(function (forecastDay, index) {
+  if (index < 6) {
+forecastHTML =
+  forecastHTML +
+  `
                  <div class="col-2">
-                   <div class="weather-forecast-date"><strong>${day}</strong></div>
-                    <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="cloudy" class=forecast-icon width="36"/>
+                   <div class="weather-forecast-date"><strong>${formatDay(forecastDay.dt)}</strong></div>
+                    <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="cloudy" class=forecast-icon width="36"/>
                   
                       <div class="weather-forecast-temperatures">
-                        <span class="weather-forecast-temperature-max"><strong>18°</strong></span>
-                      <span class="weather-forecast-temperature-min">12°</span>
+                        <span class="weather-forecast-temperature-max"><strong>${Math.round(forecastDay.temp.max)}°</strong></span>
+                      <span class="weather-forecast-temperature-min">${Math.round(forecastDay.temp.min)}°</span>
                       </div>
                       </div>`;
-                     
+  }
 });
-  
+
 
                       forecastHTML = forecastHTML + `</div>`;
+
   forecastElement.innerHTML = forecastHTML;                    
 }
+
+// daily forecast
+function getForecast(coordinates) {
+
+  
+  let apiKey = "62231151ce343c4d68652e1617efc22f";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
 
 //current temp
 function displaytemp(response) {
@@ -136,10 +161,9 @@ weatherIcon.setAttribute("alt", response.data.weather[0].description);
   let sunset = document.querySelector(".sunset");
   sunset.innerHTML = `${response.data.sys.sunset}`;
 
-// converted dt with format
-
-
+  getForecast(response.data.coord);
 }
+
 function search(city) {
  let units = "metric";
   let apiKey = "62231151ce343c4d68652e1617efc22f";
@@ -149,7 +173,7 @@ function search(city) {
 }
 
 search("singapore");
-displayForecast();
+
 
 function handleSubmit(event) {
   event.preventDefault();
