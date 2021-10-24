@@ -253,31 +253,5 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
-
-function displayFahrenheitTemp(event) {
-  event.preventDefault();
-let currentTemperature = document.querySelector(".currentTemp");
-celsiusLink.classList.remove("active");
-fahrenheitLink.classList.add("active");
-let fahrenheitTemperature = (CelsiusTemperature* 9) / 5 + 32;
-currentTemperature.innerHTML= Math.round(fahrenheitTemperature);
-
-}
-
-function displayCelsiusTemp (event) {
-  event.preventDefault();
-celsiusLink.classList.add("active");
-fahrenheitLink.classList.remove("active");
-  let currentTemperature = document.querySelector(".currentTemp");
-  currentTemperature.innerHTML = Math.round(CelsiusTemperature);
-}
-let CelsiusTemperature = null;
-
 let currentLocation = document.querySelector("#current-location");
 currentLocation.addEventListener("click", getCurrentLocation);
-
-let fahrenheitLink = document.querySelector("#fahrenheit");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
-
-let celsiusLink = document.querySelector("#celsius");
-celsiusLink.addEventListener("click", displayCelsiusTemp);
