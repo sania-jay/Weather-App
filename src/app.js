@@ -4,11 +4,39 @@ let now = new Date();
 
 let current = document.querySelector("#time");
 
+let weatherIconMapping = [
+  {
+    description: "light rain",
+    image: "rain.gif",
+  },
+    {
+      description: "moderate rain",
+      image: "rain.gif",
+    },
+  {
+    description: "moon",
+    image: "moon.gif",
+  },
+  {
+    description: "clear sky",
+    image: "sunny.gif",
+  },
+  {
+    description: "thunderstorm",
+    image: "thunder.gif",
+  },
+  {
+    description: "broken clouds",
+    image: "mostly_cloudy.gif",
+  },
+];
+
 
 let hours = now.getHours();
 if (hours < 10) {
   hours = `0${hours}`;
 }
+
 
 let minutes = now.getMinutes();
 if (minutes < 10) {
@@ -48,20 +76,24 @@ function displayForecast(response) {
   
   let forecastElement = document.querySelector("#forecast");
   
-  let forecastHTML= `<div class="row"> 
+  let forecastHTML = `<h3> <strong>Forecast For The Next Few Days</strong></h3>
+  <div class="row"> 
               <div class="col-12">
-              <h3> <strong>Forecast For Next Few Days</strong></h3>
-              <hr/>
-              <div class="row">`;
+              
+            
+              <div class="row forecast-row">`;
 
 forecast.forEach(function (forecastDay, index) {
   if (index < 6) {
+    console.log('api description is ', forecastDay.weather[0].description)
+    let weatherIcon = weatherIconMapping.find(x => x.description === forecastDay.weather[0].description).image
+    
 forecastHTML =
   forecastHTML +
   `
                  <div class="col-2">
                    <div class="weather-forecast-date"><strong>${formatDay(forecastDay.dt)}</strong></div>
-                    <img src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="cloudy" class=forecast-icon width="36"/>
+                    <img src="src/images/${weatherIcon}" alt="cloudy" class=forecast-icon width="36"/>
                   
                       <div class="weather-forecast-temperatures">
                         <span class="weather-forecast-temperature-max"><strong>${Math.round(forecastDay.temp.max)}°</strong></span>
@@ -104,11 +136,12 @@ currentCity.innerHTML= (response.data.name);
   );
   currentWeatherDescription.innerHTML = `${response.data.weather[0].description}`;
 
+  let getIcon = weatherIconMapping.find(
+    (item) => item.description === response.data.weather[0].description
+  ).image;
+
   let weatherIcon = document.querySelector("#icon");
-  weatherIcon.setAttribute(
-    "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
+  weatherIcon.setAttribute("src", `src/images/${getIcon}`);
 weatherIcon.setAttribute("alt", response.data.weather[0].description);
 
 
@@ -206,6 +239,13 @@ wind.innerHTML = `${Math.round(response.data.wind.speed)}`;
 let pressure = document.querySelector(".pressure");
 pressure.innerHTML = `${response.data.main.pressure}`;
 
+let weatherIcon = document.querySelector("#icon");
+weatherIcon.setAttribute(
+  "src",
+  `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+);
+weatherIcon.setAttribute("alt", response.data.weather[0].description);
+
 // converted to km from m with the format
 let visibility = document.querySelector(".visibility");
 visibility.innerHTML = `${Math.round(response.data.visibility/100)/10}`;
@@ -230,3 +270,6 @@ function getCurrentLocation(event) {
 
 let currentLocation = document.querySelector("#current-location");
 currentLocation.addEventListener("click", getCurrentLocation);
+
+
+  
