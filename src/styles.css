@@ -69,6 +69,7 @@ a {
 }
 .row1 {
     padding: 20px 0 20px;
+    margin-bottom: 20px;
 }
 
 .weather-app {
@@ -156,8 +157,11 @@ font-style: italic;
     
 }
 .forecast-icon {
-   margin-top: 1px;
-    width: 50px;
+   margin-top: 5px;
+   margin-bottom: 5px;
+    width: 55px;
+    height: 45px;
+    
 }
 .weather-forecast-temperature-min {
     opacity: 0.6;
