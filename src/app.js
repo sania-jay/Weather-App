@@ -6,28 +6,84 @@ let current = document.querySelector("#time");
 
 let weatherIconMapping = [
   {
-    description: "light rain",
-    image: "rain.gif",
+    icon: "01d",
+    image: "sunny.gif",
   },
-    {
-      description: "moderate rain",
-      image: "rain.gif",
-    },
+  {
+    icon: "01n",
+    image: "moon.gif",
+  },
+  {
+    icon: "02d",
+    image: "mostly_cloudy.gif",
+  },
+  {
+    icon: "02n",
+    image: "mostly_cloudy.gif",
+  },
   {
     description: "moon",
     image: "moon.gif",
+  },
+  {
+    icon: "03d",
+    image: "mostly_cloudy.gif",
+  },
+  {
+    icon: "03n",
+    image: "mostly_cloudy.gif",
+  },
+  {
+    icon: "04d",
+    image: "mostly_cloudy.gif",
+  },
+  {
+    icon: "04n",
+    image: "mostly_cloudy.gif",
+  },
+  {
+    icon: "09d",
+    image: "rain.gif",
+  },
+  {
+    icon: "09n",
+    image: "rain.gif",
+  },
+  {
+    icon: "10d",
+    image: "rain.gif",
+  },
+  {
+    icon: "10n",
+    image: "rain.gif",
   },
   {
     description: "clear sky",
     image: "sunny.gif",
   },
   {
-    description: "thunderstorm",
+    icon: "11d",
     image: "thunder.gif",
   },
   {
-    description: "broken clouds",
-    image: "mostly_cloudy.gif",
+    icon: "11n",
+    image: "thunder.gif",
+  },
+  {
+    icon: "13d",
+    image: "snow.gif",
+  },
+  {
+    icon: "13n",
+    image: "snow.gif",
+  },
+  {
+    icon: "50d",
+    image: "mist.gif",
+  },
+  {
+    icon: "50n",
+    image: "mist.gif",
   },
 ];
 
@@ -67,14 +123,11 @@ function formatDay(timestamp) {
 
   let date = new Date (timestamp * 1000);
   let day = date.getDay();
-  let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+  let days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   return days[day];
 }
 function displayForecast(response) {
- 
   let forecast=response.data.daily;
-
- 
   
   let forecastElement = document.querySelector("#forecast");
   
@@ -87,15 +140,15 @@ function displayForecast(response) {
 
 forecast.forEach(function (forecastDay, index) {
   if (index < 6) {
-    console.log('api description is ', forecastDay.weather[0].description)
-    let weatherIcon = weatherIconMapping.find(x => x.description === forecastDay.weather[0].description).image
+    console.log('api description is ', forecastDay.weather[0].icon)
+    let weatherIcon = weatherIconMapping.find(x => x.icon === forecastDay.weather[0].icon).image
     
 forecastHTML =
   forecastHTML +
   `
                  <div class="col-2">
                    <div class="weather-forecast-date"><strong>${formatDay(forecastDay.dt)}</strong></div>
-                    <img src="src/images/${weatherIcon}" alt="cloudy" class=forecast-icon width="36"/>
+                    <img src="src/images/${weatherIcon}" alt="cloudy" class=forecast-icon />
                   
                       <div class="weather-forecast-temperatures">
                         <span class="weather-forecast-temperature-max"><strong>${Math.round(forecastDay.temp.max)}°</strong></span>
@@ -124,6 +177,7 @@ function getForecast(coordinates) {
 
 //current temp
 function displaytemp(response) {
+  
   let currentCity = document.querySelector("#currentCity");
 currentCity.innerHTML= (response.data.name);
 
@@ -139,12 +193,12 @@ currentCity.innerHTML= (response.data.name);
   currentWeatherDescription.innerHTML = `${response.data.weather[0].description}`;
 
   let getIcon = weatherIconMapping.find(
-    (item) => item.description === response.data.weather[0].description
-  ).image;
+    (x) => x.icon === response.data.weather[0].icon
+  ).image
 
   let weatherIcon = document.querySelector("#icon");
   weatherIcon.setAttribute("src", `src/images/${getIcon}`);
-weatherIcon.setAttribute("alt", response.data.weather[0].description);
+weatherIcon.setAttribute("alt", response.data.weather[0].icon);
 
 
   let currentHighTemperature = document.querySelector(".currentHigh");
@@ -174,8 +228,8 @@ weatherIcon.setAttribute("alt", response.data.weather[0].description);
   visibility.innerHTML = `${Math.round(response.data.visibility / 100) / 10}`;
 
 
-
   getForecast(response.data.coord);
+  
 
 }
 
@@ -188,6 +242,8 @@ function search(city) {
 }
 
 search("singapore");
+
+
 
 
 function handleSubmit(event) {
@@ -241,11 +297,12 @@ wind.innerHTML = `${Math.round(response.data.wind.speed)}`;
 let pressure = document.querySelector(".pressure");
 pressure.innerHTML = `${response.data.main.pressure}`;
 
+ let getIcon = weatherIconMapping.find(
+   (x) => x.icon === response.data.weather[0].icon
+ ).image;
+
 let weatherIcon = document.querySelector("#icon");
-weatherIcon.setAttribute(
-  "src",
-  `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-);
+ weatherIcon.setAttribute("src", `src/images/${getIcon}`);
 weatherIcon.setAttribute("alt", response.data.weather[0].description);
 
 // converted to km from m with the format
@@ -253,7 +310,10 @@ let visibility = document.querySelector(".visibility");
 visibility.innerHTML = `${Math.round(response.data.visibility/100)/10}`;
 
 
+
  getForecast(response.data.coord);
+
+ 
 }
 
 
